@@ -1,0 +1,29 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+<div class="container">
+<h1>Editar Mascota</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    Nombre:
+    <input type="text" name="nombre" value="{{ mascota.nombre }}" required>
+
+    Edad:<br>
+
+    Años:
+    <input type="number" name="edad_anios" min="0" max="100" value="{{ mascota.edad_anios }}" required><br>
+
+    Meses:
+    <input type="number" name="edad_meses" min="0" max="11" value="{{ mascota.edad_meses }}" required><br>
+
+    Días:
+    <input type="number" name="edad_dias" min="0" max="30" value="{{ mascota.edad_dias }}" required><br>
+
+    Tipo:
+    <input type="text" name="tipo" value="{{ mascota.tipo }}" required><br>
+
+    <button type="submit">Actualizar</button>
+</form>
+</div>

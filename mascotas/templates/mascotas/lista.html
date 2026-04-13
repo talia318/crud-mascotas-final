@@ -1,0 +1,45 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+<div class="container">
+<h1>🐶 Lista de Mascotas</h1>
+
+<!-- 🔎 BUSCADOR -->
+<form method="get">
+    <input type="text" name="q" placeholder="Buscar mascota..." value="{{ query }}">
+    <button type="submit">Buscar</button>
+</form>
+
+<br>
+
+<a href="/crear/">➕ Agregar Mascota</a>
+
+{% if not mascotas %}
+    <p>No hay registros actualmente</p>
+{% else %}
+<table border="1" width="100%">
+    <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Tipo</th>
+        <th>Opciones</th>
+    </tr>
+
+    {% for m in mascotas %}
+    <tr>
+        <td>{{ m.nombre }}</td>
+        <td>
+            {{ m.edad_anios }} años,
+            {{ m.edad_meses }} meses,
+            {{ m.edad_dias }} días
+        </td>
+        <td>{{ m.tipo }}</td>
+        <td>
+            <a href="/editar/{{ m.id }}">✏️</a>
+            <a href="/eliminar/{{ m.id }}">🗑️</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+</div>
