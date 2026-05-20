@@ -1,8 +1,27 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
 
-<div class="container">
-<h1>🐶 Lista de Mascotas</h1>
+<div class="container mt-5">
+    <div class="card shadow p-4 rounded-4">
+<h1 class="text-center mb-4">🐶 Lista de Mascotas</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <!-- 👤 Usuario -->
+    <span class="text-muted">
+        👤 {{ request.user.username }}
+    </span>
+
+    <!-- 🔒 Logout -->
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-danger btn-sm">
+            Cerrar sesión
+        </button>
+    </form>
+
+</div>
 
 <!-- 🔎 BUSCADOR -->
 <form method="get">
@@ -11,35 +30,54 @@
 </form>
 
 <br>
+<a href="/crear/" class="btn btn-primary mb-3">
+    ➕ Agregar Mascota
+</a>
 
-<a href="/crear/">➕ Agregar Mascota</a>
 
 {% if not mascotas %}
     <p>No hay registros actualmente</p>
 {% else %}
-<table border="1" width="100%">
-    <tr>
+<div class="table-responsive rounded-3 overflow-hidden">
+<table class="table table-hover align-middle text-center table-striped">
+    <tr class="table-primary">
+        <th>Código</th>
         <th>Nombre</th>
         <th>Edad</th>
-        <th>Tipo</th>
+        <th>Especie</th>
         <th>Opciones</th>
     </tr>
 
     {% for m in mascotas %}
     <tr>
+        <td>{{ m.codigo }}</td>
         <td>{{ m.nombre }}</td>
         <td>
             {{ m.edad_anios }} años,
             {{ m.edad_meses }} meses,
             {{ m.edad_dias }} días
         </td>
-        <td>{{ m.tipo }}</td>
-        <td>
-            <a href="/editar/{{ m.id }}">✏️</a>
-            <a href="/eliminar/{{ m.id }}">🗑️</a>
-        </td>
+       <td>
+    <span class="badge rounded-pill bg-primary-subtle text-primary px-3 py-2">
+        {{ m.tipo }}
+    </span>
+</td>
+       <td>
+    <a href="/editar/{{ m.id }}" class="btn btn-sm btn-outline-warning text-dark me-1">
+        ✏️ Editar
+    </a>
+
+    <a href="/eliminar/{{ m.id }}" 
+   class="btn btn-sm btn-outline-danger text-dark"
+   onclick="return confirm('¿Seguro que quieres eliminar esta mascota?')">
+    🗑️ Eliminar
+    </a>
+</td>
+           
     </tr>
     {% endfor %}
 </table>
+</div>
 {% endif %}
+</div>
 </div>

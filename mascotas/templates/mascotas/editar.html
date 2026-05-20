@@ -1,12 +1,18 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
 
 <div class="container">
 <h1>Editar Mascota</h1>
+<a href="/" class="btn btn-secondary mb-3">
+    ⬅️ Volver
+</a>
 
 <form method="post">
     {% csrf_token %}
-
+<label>Código:</label>
+<input type="text" name="codigo" value="{{ mascota.codigo }}">
+<br>
     Nombre:
     <input type="text" name="nombre" value="{{ mascota.nombre }}" required>
 
@@ -21,7 +27,7 @@
     Días:
     <input type="number" name="edad_dias" min="0" max="30" value="{{ mascota.edad_dias }}" required><br>
 
-    Tipo:
+    Especie:
     <input type="text" name="tipo" value="{{ mascota.tipo }}" required><br>
 
     <button type="submit">Actualizar</button>
