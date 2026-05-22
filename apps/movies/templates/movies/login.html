@@ -1,24 +1,65 @@
 {% extends 'movies/fragments/base.html' %}
 {% block main-content %}
 
-    <div class="center-align">
-        <img src="https://cdn.dribbble.com/users/1162077/screenshots/3333053/popcorn.png" alt="movie icon"
-             height="200px" width="200px">
-    </div>
+<style>
+    body{
+        background: linear-gradient(135deg, #74ebd5, #9face6);
+    }
 
+    .login-card{
+        margin-top: 50px;
+        padding: 30px;
+        border-radius: 25px;
+        background: white;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .login-btn{
+        width: 100%;
+        border-radius: 15px;
+        font-weight: bold;
+    }
+
+    img{
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container">
     <div class="row">
-        <div class="col s8 offset-s2">
+        <div class="col s12 m6 offset-m3">
 
-            {% if message %}
-                <div class="card-panel red darken-1">
-                  <span class="white-text">
-                      {{ message }}
-                  </span>
-                </div>
-            {% endif %}
+            <div class="center-align">
+                <img src="https://cdn.dribbble.com/users/1162077/screenshots/3333053/popcorn.png"
+                     alt="movie icon"
+                     height="120px"
+                     width="120px">
 
-            {% include 'movies/fragments/forms.html' %}
+                <h4 class="white-text">Bienvenido</h4>
+            </div>
+
+            <div class="login-card">
+
+                {% if message %}
+                    <div class="card-panel red darken-1">
+                        <span class="white-text">
+                            {{ message }}
+                        </span>
+                    </div>
+                {% endif %}
+
+                {% include 'movies/fragments/forms.html' %}
+
+                <br>
+
+                <button class="btn blue login-btn">
+                    Ingresar
+                </button>
+
+            </div>
 
         </div>
     </div>
+</div>
+
 {% endblock %}
